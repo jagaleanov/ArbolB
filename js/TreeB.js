@@ -244,12 +244,12 @@ class TreeB {
                             keys.join(' . ') +
                             ' .</div>';
             */
-            html = '<li>' +
-                '<div class="badge rounded-pill bg-primary" >' +
-                keys.join('&nbsp;&nbsp;') +
-                '</div>';
 
             if (head.children.length > 0) {
+                html = '<li>' +
+                    '<div class="badge rounded-pill bg-primary" >. ' +
+                    keys.join(' . ') +
+                    ' .</div>';
 
                 html += '<ul>';
 
@@ -258,6 +258,12 @@ class TreeB {
                 }
 
                 html += '</ul>';
+            } else {
+
+                html = '<li>' +
+                    '<div class="badge rounded-pill bg-primary" >' +
+                    keys.join('&nbsp;&nbsp;') +
+                    '</div>';
             }
 
             html += '</li>';
@@ -446,75 +452,3 @@ function deleteNumber() {
     $('#deleteTxt').val('');
     $('#deleteTxt').focus();
 }
-
-
-
-tree = new TreeB(parseInt(2));
-
-
-tree.insert('a');
-tree.insert('b');
-tree.insert('c');
-tree.insert('d');
-tree.insert('e');
-tree.insert('f');
-tree.insert('g');
-tree.insert('h');
-tree.insert('i');
-tree.insert('j');
-tree.insert('k');
-tree.insert('l');
-tree.insert('m');
-tree.insert('n');
-tree.insert('o');
-tree.insert('p');
-tree.insert('q');
-tree.insert('r');
-tree.insert('s');
-tree.insert('t');
-tree.insert('u');
-tree.insert('v');
-tree.insert('w');
-tree.insert('x');
-tree.insert('y');
-tree.insert('z');
-
-/*
-tree.insert('1');
-tree.insert('2');
-tree.delete('t');
-tree.delete('l');
-tree.delete('u');
-tree.delete('f');
-tree.delete('h');
-tree.delete('b');
-tree.delete('m');
-tree.delete('p');
-tree.delete('v');
-tree.delete('j');
-tree.delete('c');
-tree.delete('e');
-tree.delete('k');
-tree.delete('n');
-tree.delete('w');
-tree.delete('r');
-tree.delete('s');
-tree.delete('o');
-tree.delete('d');
-tree.delete('q');
-tree.delete('x');
-tree.delete('y');
-tree.delete('a');
-tree.delete('z');
-tree.delete('g');
-tree.delete('i');
-
-tree.insert('a');
-*/
-
-
-console.log('Actual tree');
-console.log(tree.root);
-
-
-$('#treeUl').html(tree.toHTML(tree.root));
