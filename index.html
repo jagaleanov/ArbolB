@@ -32,14 +32,14 @@
                         </div>
                     </div>
                     <div class="col">
-                        <label for="insertTxt">Ingresar una letra</label>
+                        <label for="insertTxt">Ingresar un caracter</label>
                         <div class="input-group mb-3">
                             <input type="text" id="insertTxt" class="form-control" readonly>
                             <button type="button" id="insertBtn" class="btn btn-primary" onclick="insertNumber()" disabled>Insertar</button>
                         </div>
                     </div>
                     <div class="col">
-                        <label for="deleteTxt">Retirar una letra</label>
+                        <label for="deleteTxt">Retirar un caracter</label>
                         <div class="input-group mb-3">
                             <input type="text" id="deleteTxt" class="form-control" readonly>
                             <button type="button" id="deleteBtn" class="btn btn-danger" onclick="deleteNumber()" disabled>Eliminar</button>
@@ -51,9 +51,8 @@
         <div class="card mx-4 mt-4">
             <div class="card-body ">
                 <h5 class="card-title">Árbol generado</h5>
-                <div class="tree">
-                    <ul id="treeUl">
-                    </ul>
+                <div id="canvas_area">
+                    <canvas id="canvas" width="960" height="450" onmouseup="on_canvas_clicked(event)"></canvas>
                 </div>
             </div>
         </div>

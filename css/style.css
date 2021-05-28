@@ -3,6 +3,13 @@ body{
     background:#888888;
 }
 
+
+#canvas_area
+{
+    width: 960px; 
+    margin: 0 auto; 
+}
+
 .tree{
     white-space: nowrap;
 }
