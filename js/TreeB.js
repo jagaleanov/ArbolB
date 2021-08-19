@@ -161,14 +161,17 @@ class TreeB {
                     let nodeParentPivot = stack.pop();
                     if (nodePivot.keys.length > this.numMaxKey) {//si el nodo tiene más llaves de lo debido
 
+                        //crear el nodo izquierdo
                         let node1 = new Node();
                         for (let i = 0; i < (this.numMaxKey / 2); i++) {
                             node1.keys.push(nodePivot.keys[i]);
                         }
+
                         for (let i = 0; i < (this.numMaxPointer / 2) && i < nodePivot.children.length; i++) {
                             node1.children.push(nodePivot.children[i]);
                         }
 
+                        //crear el nodo derecho
                         let node2 = new Node();
                         for (let i = (this.numMaxKey / 2) + 1; i <= this.numMaxKey; i++) {
                             node2.keys.push(nodePivot.keys[i]);
@@ -178,12 +181,15 @@ class TreeB {
                             node2.children.push(nodePivot.children[i]);
                         }
 
-                        let keyUp = nodePivot.keys[this.numMaxKey / 2];
+                        let keyUp = nodePivot.keys[this.numMaxKey / 2];//selecciona la llave a subir
 
                         let pos = 0;
+                        //buscar a donde subir la llave
                         while (pos < nodeParentPivot.keys.length && nodeParentPivot.keys[pos] < keyUp) {
                             pos++;
                         }
+
+                        //acomodar la nueva llava y los nuevos hijos
                         nodeParentPivot.keys.splice(pos, 0, keyUp);
                         nodeParentPivot.children.splice(pos, 1, node1);
                         nodeParentPivot.children.splice(pos + 1, 0, node2);
@@ -232,7 +238,6 @@ class TreeB {
     }
 
     delete(value) {
-        console.log('DELETE ' + value + ' *******************************');
 
         if (!this.exist(value, this.root)) {
             alert('El valor ' + value + ' no existe en el árbol.');
@@ -275,9 +280,6 @@ class TreeB {
 
             let nodeParentPivot;
 
-            console.log('FINAL STACK');
-            console.log(stack.head);
-
             while (!stack.isEmpty()) {
 
                 nodeParentPivot = stack.pop();
@@ -287,20 +289,10 @@ class TreeB {
                 pos = nodeParentPivot.children.indexOf(nodePivot);
 
                 if (nodePivot.keys.length < this.grade) {
-                    console.log('**POP nodeParent');
-                    console.log(nodeParentPivot);
 
-                    console.log('nodePivot');
-                    console.log(nodePivot);
-
-                    console.log('pos pivot');
-                    console.log(pos);
-
-                    if (nodeParentPivot.children.length > pos + 1 && nodeParentPivot.children[pos + 1].keys.length > this.grade) {//redistribuir desde la derecha
-                        console.log('redistribuir desde la derecha');
+                    if (nodeParentPivot.children.length > pos + 1 && nodeParentPivot.children[pos + 1].keys.length > this.grade) {
+                        //redistribuir desde la derecha
                         let temp = nodeParentPivot.keys.splice(pos, 1)[0];
-                        console.log('temp');
-                        console.log(temp);
                         nodePivot.keys.push(temp);
                         nodeParentPivot.keys.splice(pos, 1, nodeParentPivot.children[pos + 1].keys.shift());
 
@@ -308,11 +300,9 @@ class TreeB {
                             nodePivot.children.push(nodeParentPivot.children[pos + 1].children.shift());
                         }
 
-                    } else if (pos > 0 && nodeParentPivot.children[pos - 1].keys.length > this.grade) {//redistribuir desde la izquierda
-                        console.log('redistribuir desde la izquierda');
+                    } else if (pos > 0 && nodeParentPivot.children[pos - 1].keys.length > this.grade) {
+                        //redistribuir desde la izquierda
                         let temp = nodeParentPivot.keys.splice(pos - 1, 1)[0];
-                        console.log('temp');
-                        console.log(temp);
                         nodePivot.keys.unshift(temp);
                         nodeParentPivot.keys.splice(pos, 1, nodeParentPivot.children[pos - 1].keys.pop());
 
@@ -321,7 +311,6 @@ class TreeB {
                         }
 
                     } else if (pos > 0) {//mezclar con nodo izquierdo
-                        console.log('mezclar con nodo izquierdo');
 
                         nodePivot.keys.unshift(nodeParentPivot.keys[pos - 1]);
                         while (nodeParentPivot.children[pos - 1].keys.length > 0) {
@@ -333,8 +322,7 @@ class TreeB {
                         nodeParentPivot.keys.splice(pos - 1, 1);
                         nodeParentPivot.children.splice(pos - 1, 1);
                         nodeParentPivot.children[pos - 1] = nodePivot;
-                    } else {
-                        console.log('mezclar con nodo derecho');
+                    } else {//mezclar con nodo derecho
 
                         nodePivot.keys.push(nodeParentPivot.keys[pos]);
                         while (nodeParentPivot.children[pos + 1].keys.length > 0) {
