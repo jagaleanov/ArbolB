@@ -34,7 +34,6 @@ class ListNode {
 }
 
 class Stack {
-
     head;
 
     constructor() {
@@ -68,7 +67,6 @@ class Stack {
 }
 
 class Queue {
-
     head;
 
     constructor() {
@@ -286,12 +284,10 @@ class TreeB {
                 }
             }
 
-
             let nodeParentPivot;
 
             console.log('FINAL STACK');
             console.log(stack.head);
-
 
             while (!stack.isEmpty()) {
 
@@ -363,7 +359,6 @@ class TreeB {
                         console.log(nodeParentPivot.children);
                         nodeParentPivot.children.splice(pos + 1, 1);
                         nodeParentPivot.children[pos] = nodePivot;
-
                     }
                 } else {
                     nodeParentPivot.children[pos] = nodePivot;
@@ -375,18 +370,6 @@ class TreeB {
             if (this.root.keys.length == 0 && this.root.children.length == 1) {
                 this.root = this.root.children[0];
             }
-
-
-
-
-
-
-
-
-
-
-
-
         }
     }
 }
@@ -396,7 +379,7 @@ class BTreeDrawing {
     canvas;
     context;
     highlight;
-    
+
     constructor(tree) {
         console.log('tree');
         console.log(tree);
@@ -665,10 +648,6 @@ function deleteNumber() {
     $('#deleteTxt').focus();
 }
 
-
-
-
-
 function on_canvas_clicked(e) {
     console.log('e');
     console.log(e);
@@ -693,9 +672,6 @@ function on_canvas_clicked(e) {
     console.log('canvas.offsetLeft ' + canvas.offsetLeft);
     console.log('canvas.offsetTop ' + canvas.offsetTop);
 
-
-
-
     var delta_x = 0;
     var delta_y = 0;
     var width = canvas.width;
@@ -711,12 +687,10 @@ function on_canvas_clicked(e) {
     console.log('middle_x ' + middle_x);
     console.log('middle_y ' + middle_y);
 
-
     console.log('y-195= ');
     console.log(y - 195);
 
     console.log(y - 195 < OFFSET * 2);
-
 
     // Scroll left
     if (x < OFFSET * 2 &&
