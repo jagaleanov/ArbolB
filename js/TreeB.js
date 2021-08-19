@@ -322,6 +322,7 @@ class TreeB {
                         nodeParentPivot.keys.splice(pos - 1, 1);
                         nodeParentPivot.children.splice(pos - 1, 1);
                         nodeParentPivot.children[pos - 1] = nodePivot;
+                        
                     } else {//mezclar con nodo derecho
 
                         nodePivot.keys.push(nodeParentPivot.keys[pos]);
