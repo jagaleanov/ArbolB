@@ -388,20 +388,7 @@ class BTreeDrawing {
         this.context = canvas.getContext("2d");
         this.highlight = null;
     }
-
-    /*
-    draw: (re)paints the tree
-        mode: describes the reason for the (re)drawing
-            CENTER_ROOT: centering the root at the top
-            CENTER_NODE: fully centering a node, and optionally 
-                         highlighting it
-            SCROLL: scrolling the tree, just move it
-        For each mode, arg1 and arg2 assume different values:
-            CENTER_ROOT: arg1 and arg2 are not used;
-            CENTER_NODE: arg1 is center node and arg2 is highlight key
-            SCROLL: arg1 is the x delta and arg2 is the y delta
-    Returns: -
-    */
+    
     draw(mode, arg1, arg2) {
         if (mode == undefined)
             mode = CENTER_ROOT;
@@ -491,12 +478,7 @@ class BTreeDrawing {
         context.closePath();
         context.fill();
     }
-
-    /*
-    draw_node: draw a tree rooted in the given node to a canvas context.
-        node: the node that will be drawn
-    Returns: -
-    */
+    
     draw_node(node) {
         // Localize variables for easier access
         var context = this.context;
@@ -530,14 +512,7 @@ class BTreeDrawing {
             context.closePath();
         }
     }
-
-    /*
-    position_tree: lay out a tree for drawing.
-        node: the tree root to lay out
-        pnode: the parent node (defaults to undefined)
-        cur_x: the current x coordinate (defaults to 0)
-    Returns: -
-    */
+    
     position_tree(node, pnode, cur_x) {
         if (node.children.length != 0) {
             cur_x = (cur_x == undefined) ? 0 : cur_x;
@@ -571,13 +546,7 @@ class BTreeDrawing {
             }
         }
     }
-
-    /*
-    get_tree_width: calculate the width of a tree based on its leftmost 
-    and rightmost children.
-        node: the tree root whose width will be calculated
-    Returns: the width of the tree.
-    */
+    
     get_tree_width(node) {
         if (node.children.length > 0) {
             var lm = node.children[0];
@@ -590,14 +559,7 @@ class BTreeDrawing {
         }
         return WIDTH * node.keys.length;
     }
-
-    /*
-    move_tree: move the nodes of a tree based on given deltas
-        node: the node to move (if undefined, becomes the root)
-        delta_x: delta x (horizontal)
-        delta_y: delta y (vertical)
-    Returns: -
-    */
+    
     move_tree(delta_x, delta_y, node) {
         if (node == undefined) {
             node = this.tree.root;
@@ -628,7 +590,7 @@ function instance() {
     }
 }
 
-function insertNumber() {
+function insertChar() {
     if ($('#insertTxt').val() != '') {
         tree.insert($('#insertTxt').val());
         treeDraw = new BTreeDrawing(tree);
@@ -640,7 +602,7 @@ function insertNumber() {
     }
 }
 
-function deleteNumber() {
+function deleteChar() {
     tree.delete($('#deleteTxt').val());
     treeDraw = new BTreeDrawing(tree);
     treeDraw.draw();
@@ -648,7 +610,7 @@ function deleteNumber() {
     $('#deleteTxt').focus();
 }
 
-function on_canvas_clicked(e) {
+function onClickCanvas(e) {
     console.log('e');
     console.log(e);
     var x = 0;
