@@ -1,4 +1,3 @@
-
 // Constants
 WIDTH = 32; // Key width
 HEIGHT = 32; // Key height
@@ -390,9 +389,7 @@ class TreeB {
 
         }
     }
-
 }
-
 
 class BTreeDrawing {
     tree;
@@ -408,8 +405,6 @@ class BTreeDrawing {
         this.context = canvas.getContext("2d");
         this.highlight = null;
     }
-
-
 
     /*
     draw: (re)paints the tree
@@ -554,25 +549,6 @@ class BTreeDrawing {
     }
 
     /*
-    get_tree_width: calculate the width of a tree based on its leftmost 
-    and rightmost children.
-        node: the tree root whose width will be calculated
-    Returns: the width of the tree.
-    */
-    get_tree_width(node) {
-        if (node.children.length > 0) {
-            var lm = node.children[0];
-            while (lm.children.length > 0)
-                lm = lm.children[0];
-            var rm = node.children[node.children.length - 1];
-            while (rm.children.length > 0)
-                rm = rm.children[rm.children.length - 1];
-            return (rm.x - lm.x) + WIDTH * rm.keys.length;
-        }
-        return WIDTH * node.keys.length;
-    }
-
-    /*
     position_tree: lay out a tree for drawing.
         node: the tree root to lay out
         pnode: the parent node (defaults to undefined)
@@ -611,6 +587,25 @@ class BTreeDrawing {
                     (last.keys.length) * WIDTH) / 2) - width / 2;
             }
         }
+    }
+
+    /*
+    get_tree_width: calculate the width of a tree based on its leftmost 
+    and rightmost children.
+        node: the tree root whose width will be calculated
+    Returns: the width of the tree.
+    */
+    get_tree_width(node) {
+        if (node.children.length > 0) {
+            var lm = node.children[0];
+            while (lm.children.length > 0)
+                lm = lm.children[0];
+            var rm = node.children[node.children.length - 1];
+            while (rm.children.length > 0)
+                rm = rm.children[rm.children.length - 1];
+            return (rm.x - lm.x) + WIDTH * rm.keys.length;
+        }
+        return WIDTH * node.keys.length;
     }
 
     /*
