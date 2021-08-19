@@ -1,14 +1,3 @@
-// Constants
-WIDTH = 32; // Key width
-HEIGHT = 32; // Key height
-SPACING = 32; // Node spacing
-OFFSET = 16; // Scroll offset
-// Constants for the BTreeDrawing.draw method
-CENTER_ROOT = 0;
-CENTER_NODE = 1;
-SCROLL = 2;
-
-
 class Node {
     keys;
     children;
@@ -373,6 +362,16 @@ class TreeB {
         }
     }
 }
+
+// Constants
+WIDTH = 32; // Key width
+HEIGHT = 32; // Key height
+SPACING = 32; // Node spacing
+OFFSET = 16; // Scroll offset
+// Constants for the BTreeDrawing.draw method
+CENTER_ROOT = 0;
+CENTER_NODE = 1;
+SCROLL = 2;
 
 class BTreeDrawing {
     tree;
