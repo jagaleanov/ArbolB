@@ -260,6 +260,7 @@ class TreeB {
             let nodeToDeleteFrom = nodePivot;//el nodo que contiene la llave a borrar
             let i = nodeToDeleteFrom.keys.indexOf(value);// posicion de la llave a borrar
 
+
             if (nodeToDeleteFrom.children.length == 0) {//si es una hoja
                 nodeToDeleteFrom.keys.splice(i, 1);
             } else {//si no es una hoja
@@ -268,6 +269,7 @@ class TreeB {
                     queue.enqueue(nodePivot);
                     nodePivot = nodePivot.children[0];
                 }
+
                 nodeToDeleteFrom.keys.splice(i, 1, nodePivot.keys[0]);//reemplazar llave borrada por el sucesor
                 nodePivot.keys.splice(0, 1);//eliminar la llave sucesora de la posicion anterior
 
@@ -280,18 +282,19 @@ class TreeB {
 
             let nodeParentPivot;
 
-            while (!stack.isEmpty()) {
+            //nodePivot = nodeToDeleteFrom;
+
+            while (!stack.isEmpty() ) {
 
                 nodeParentPivot = stack.pop();
 
                 let pos;
 
-                pos = nodeParentPivot.children.indexOf(nodePivot);
+                pos = nodeParentPivot.children.indexOf(nodePivot);/***/
 
                 if (nodePivot.keys.length < this.grade) {
 
-                    if (nodeParentPivot.children.length > pos + 1 && nodeParentPivot.children[pos + 1].keys.length > this.grade) {
-                        //redistribuir desde la derecha
+                    if (nodeParentPivot.children.length > pos + 1 && nodeParentPivot.children[pos + 1].keys.length > this.grade) {//redistribuir desde la derecha
                         let temp = nodeParentPivot.keys.splice(pos, 1)[0];
                         nodePivot.keys.push(temp);
                         nodeParentPivot.keys.splice(pos, 1, nodeParentPivot.children[pos + 1].keys.shift());
@@ -300,14 +303,13 @@ class TreeB {
                             nodePivot.children.push(nodeParentPivot.children[pos + 1].children.shift());
                         }
 
-                    } else if (pos > 0 && nodeParentPivot.children[pos - 1].keys.length > this.grade) {
-                        //redistribuir desde la izquierda
+                    } else if (pos > 0 && nodeParentPivot.children[pos - 1].keys.length > this.grade) {//redistribuir desde la izquierda
                         let temp = nodeParentPivot.keys.splice(pos - 1, 1)[0];
                         nodePivot.keys.unshift(temp);
                         nodeParentPivot.keys.splice(pos, 1, nodeParentPivot.children[pos - 1].keys.pop());
 
                         if (nodeParentPivot.children[pos - 1].children.length > nodeParentPivot.children[pos - 1].keys.length + 1) {
-                            nodePivot.children.unshift(nodeParentPivot.children[pos - 1].children.splice(0, 1));
+                            nodePivot.children.unshift(nodeParentPivot.children[pos - 1].children.pop());
                         }
 
                     } else if (pos > 0) {//mezclar con nodo izquierdo
@@ -322,7 +324,6 @@ class TreeB {
                         nodeParentPivot.keys.splice(pos - 1, 1);
                         nodeParentPivot.children.splice(pos - 1, 1);
                         nodeParentPivot.children[pos - 1] = nodePivot;
-                        
                     } else {//mezclar con nodo derecho
 
                         nodePivot.keys.push(nodeParentPivot.keys[pos]);
@@ -334,7 +335,6 @@ class TreeB {
                         }
 
                         nodeParentPivot.keys.splice(pos, 1);
-                        console.log(nodeParentPivot.children);
                         nodeParentPivot.children.splice(pos + 1, 1);
                         nodeParentPivot.children[pos] = nodePivot;
                     }
@@ -369,8 +369,6 @@ class BTreeDrawing {
     highlight;
 
     constructor(tree) {
-        console.log('tree');
-        console.log(tree);
         this.tree = tree;
         this.canvas = document.getElementById("canvas");
         this.context = canvas.getContext("2d");
@@ -513,7 +511,7 @@ class BTreeDrawing {
             for (var i = 0; i < node.children.length; i++) {
                 child = node.children[i];
 
-                // If it is not a leaf, place the sutree accordingly                
+                // If it is not a leaf, place the sutree accordingly              
                 if (child.children.length != 0)
                     this.position_tree(child, node, cur_x);
                 // If it's a leaf, lay it out based on its siblings
@@ -599,8 +597,6 @@ function deleteChar() {
 }
 
 function onClickCanvas(e) {
-    console.log('e');
-    console.log(e);
     var x = 0;
     var y = 0;
     var canvas = document.getElementById("canvas");
@@ -619,8 +615,6 @@ function onClickCanvas(e) {
     // Get the coordinates relatively to the canvas
     x = x - canvas.offsetLeft - 30;
     y = y - canvas.offsetTop - 195;
-    console.log('canvas.offsetLeft ' + canvas.offsetLeft);
-    console.log('canvas.offsetTop ' + canvas.offsetTop);
 
     var delta_x = 0;
     var delta_y = 0;
@@ -629,18 +623,6 @@ function onClickCanvas(e) {
 
     middle_y = canvas.height / 2;
     middle_x = canvas.width / 2;
-
-    console.log('x ' + x);
-    console.log('y ' + y);
-    console.log('width ' + width);
-    console.log('height ' + height);
-    console.log('middle_x ' + middle_x);
-    console.log('middle_y ' + middle_y);
-
-    console.log('y-195= ');
-    console.log(y - 195);
-
-    console.log(y - 195 < OFFSET * 2);
 
     // Scroll left
     if (x < OFFSET * 2 &&
@@ -660,3 +642,7 @@ function onClickCanvas(e) {
         delta_y = -OFFSET;
     treeDraw.draw(SCROLL, delta_x, delta_y);
 }
+
+
+
+
